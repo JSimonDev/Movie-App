@@ -12,7 +12,7 @@ export class SlideshowPosterComponent implements OnInit {
   @Input() peliculas: Movie[] = [];
   slideOpt = {
     slidesPerView: 3.3,
-    freeMode: false,
+    freeMode: true,
   };
 
   constructor( private modalCtrl: ModalController ) { }

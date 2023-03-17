@@ -10,9 +10,11 @@ import { Movie } from '../interfaces/interfaces';
 export class Tab1Page implements OnInit {
   peliculasRecientes: Movie[] = [];
   peliculasPopulares: Movie[] = [];
+  peliculasPopularesInfantiles: Movie[] = [];
   
 
-  constructor(private moviesService: MoviesService) {}
+  constructor(private moviesService: MoviesService) {
+  }
   
   getPopulares() {
     this.moviesService.getPopular()
@@ -27,6 +29,10 @@ export class Tab1Page implements OnInit {
     .subscribe(resp => {
       this.peliculasRecientes = resp.results;
     });
+    this.moviesService.getKidPopular()
+    .subscribe(resp => {
+      this.peliculasPopularesInfantiles = resp.results;
+    })
     this.getPopulares();
   };
 

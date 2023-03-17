@@ -1,6 +1,6 @@
 <ion-content [fullscreen]="true">
 
-  <ion-grid fixed>
+  <!-- <ion-grid fixed>
     <ion-row>
       <ion-col>
         <h3 class="ion-no-margin ion-padding-top">Películas De Este Mes</h3>
@@ -8,8 +8,9 @@
     </ion-row>
   </ion-grid>
 
-  <app-slideshow-backdrop [peliculas]="peliculasRecientes"></app-slideshow-backdrop>
+  <app-slideshow-backdrop [peliculas]="peliculasRecientes"></app-slideshow-backdrop> -->
 
+  
   <ion-grid fixed>
     <ion-row>
       <ion-col>
@@ -18,16 +19,30 @@
     </ion-row>
   </ion-grid>
 
+  <app-skeleton *ngIf="peliculasRecientes.length < 1"></app-skeleton>
   <app-slideshow-poster [peliculas]="peliculasRecientes"></app-slideshow-poster>
 
   <ion-grid fixed>
     <ion-row>
       <ion-col>
-        <h3 class="ion-no-margin">Populares</h3>
+        <h3 class="ion-no-margin">Películas Infantiles</h3>
       </ion-col>
     </ion-row>
   </ion-grid>
 
+  <app-skeleton *ngIf="peliculasPopularesInfantiles.length < 1"></app-skeleton>
+  <app-slideshow-poster [peliculas]="peliculasPopularesInfantiles"></app-slideshow-poster>
+
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col>
+        <h3 class="ion-no-margin">Películas Populares</h3>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <app-skeleton *ngIf="peliculasPopulares.length < 1"></app-skeleton>
+  <app-skeleton *ngIf="peliculasPopulares.length < 1"></app-skeleton>
   <app-slideshow-pares  [peliculas]="peliculasPopulares"
                         (loadMore)="loadMore()"></app-slideshow-pares>
 

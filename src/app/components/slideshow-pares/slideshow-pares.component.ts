@@ -13,7 +13,7 @@ export class SlideshowParesComponent implements OnInit {
   @Output() loadMore = new EventEmitter();
   slideOpt = {
     slidesPerView: 3.3,
-    freeMode: false,
+    freeMode: true,
     spaceBetween: -10
   };
 

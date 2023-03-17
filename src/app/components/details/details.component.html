@@ -16,80 +16,145 @@
     </ion-buttons>
   </ion-toolbar> -->
 
+  <!-- BACKDROP DE LA PELICULA -->
   <ion-label class="titulo">
-    <h1>{{ movie.title}}</h1>
+    <h1>{{ movie.title }}</h1>
   </ion-label>
-
-  <img [src]="movie.backdrop_path | imagen" *ngIf="movie.backdrop_path" />
+  <img
+    class="backdrop-img"
+    [src]="movie.backdrop_path | imagen"
+    *ngIf="movie.backdrop_path"
+  />
+  <div class="backdrop-container"></div>
 
   <ion-grid>
     <ion-row>
+      <!-- POSTER DE LA PELICULA -->
       <ion-col size="4" class="poster-detalle-sobre">
-        <ion-card>
+        <ion-card class="poster-img">
           <img [src]="movie.poster_path | imagen" *ngIf="movie.poster_path" />
         </ion-card>
       </ion-col>
-      <ion-col>
-        <ion-item>
-          <ion-icon size="small" slot="start" name="thumbs-up" color="primary"></ion-icon>
+      <!-- ESTADISTICAS DE LA PELICULA -->
+      <ion-col class="statistics-container">
+        <!-- RATING -->
+        <ion-item class="statistics">
+          <ion-icon
+            size="small"
+            slot="start"
+            name="sparkles-outline"
+            color="primary"
+          ></ion-icon>
           <ion-label>Rating</ion-label>
-          <ion-note slot="end" color="primary">{{movie.vote_average}}</ion-note>
+          <ion-note slot="end" color="primary">{{
+            movie.vote_average
+          }}</ion-note>
         </ion-item>
-        <ion-item>
-          <ion-icon slot="start" name="people-circle-outline" color="primary"></ion-icon>
+        <!-- Trailer Video -->
+        <ion-item class="statistics">
+          <ion-button
+            (click)="openTrailer()"
+            expand="full"
+            size=""
+            shape=""
+            ><ion-icon slot="start" name="play-outline"></ion-icon>
+            Reproducir Trailer
+          </ion-button>
+        </ion-item>
+        <!-- VOTOS -->
+        <ion-item class="statistics">
+          <ion-icon
+            slot="start"
+            name="people-circle-outline"
+            color="primary"
+          ></ion-icon>
           <ion-label>Votos</ion-label>
-          <ion-note slot="end" color="primary">{{movie.vote_count}}</ion-note>
+          <ion-note slot="end" color="primary">{{ movie.vote_count }}</ion-note>
         </ion-item>
       </ion-col>
     </ion-row>
   </ion-grid>
+  <!-- DESCRIPCION DE PELICULA -->
   <ion-grid fixed>
     <ion-row>
       <ion-col size="12">
-        <ion-label>{{movie.overview | slice: 0: hiddenText}}</ion-label>
-        <ion-label class="btn-read-more" (click)="hiddenText = 5000" shape="round" *ngIf="hiddenText !== 5000"
-        >...Ver más
+        <ion-label>{{ movie.overview | slice : 0 : hiddenText }}</ion-label>
+        <!-- BOTON VER MAS -->
+        <ion-label
+          class="btn-read-more"
+          (click)="hiddenText = 5000"
+          shape="round"
+          *ngIf="
+            hiddenText !== 5000 &&
+            overviewLength !== undefined &&
+            overviewLength > 150
+          "
+          >...Ver más
         </ion-label>
-        <ion-label class="btn-read-more" (click)="hiddenText = 150" shape="round" *ngIf="hiddenText === 5000"
+        <!-- BOTON VER MENOS -->
+        <!-- <ion-label  class="btn-read-more" (click)="hiddenText = 150" shape="round" *ngIf="hiddenText === 5000"
         >Ver menos
-        </ion-label>
+        </ion-label> -->
       </ion-col>
     </ion-row>
+    <!-- GENEROS -->
     <ion-row>
       <ion-col size="12">
         <ion-chip *ngFor="let genre of movie.genres" color="primary">
-          <ion-label>{{genre.name}}</ion-label>
+          <ion-label>{{ genre.name }}</ion-label>
         </ion-chip>
       </ion-col>
     </ion-row>
   </ion-grid>
+  <!-- PELICULAS SIMILARES -->
   <ion-grid fixed>
+    <ion-row>
+      <ion-col>
+        <ion-label *ngIf="recommendedMovies.length > 0" class="title"
+          >Más Similares</ion-label
+        >
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <app-slideshow-poster [peliculas]="recommendedMovies"></app-slideshow-poster>
+  <!-- ACTORES -->
+  <ion-grid fixed>
+    <!-- ACTORES TITULO -->
     <ion-row>
       <ion-col>
         <ion-label class="title">Actores</ion-label>
       </ion-col>
     </ion-row>
   </ion-grid>
+  <!-- ACTORES CARDS -->
   <ion-slides [options]="slideOpt">
     <ion-slide *ngFor="let actor of actors">
       <ion-card class="card-actor">
-        <img *ngIf="!actor.profile_path" src='/assets/no-avatar.jpg' class="no-avatar-img">
-        <img *ngIf="actor.profile_path" [src]="actor.profile_path | imagen">
+        <img
+          *ngIf="!actor.profile_path"
+          src="/assets/no-avatar.jpg"
+          class="no-avatar-img"
+        />
+        <img *ngIf="actor.profile_path" [src]="actor.profile_path | imagen" />
         <ion-card-header class="card-header-padding ion-no-padding">
-          <ion-card-subtitle>{{actor.name}} / {{actor.character}}</ion-card-subtitle>
+          <ion-card-title>{{ actor.name }}</ion-card-title>
+          <ion-card-subtitle>{{ actor.character }}</ion-card-subtitle>
         </ion-card-header>
       </ion-card>
     </ion-slide>
   </ion-slides>
 </ion-content>
+<!-- FOOTER -->
 <ion-footer>
   <ion-toolbar>
+    <!-- BOTON REGRESAR -->
     <ion-buttons slot="start">
       <ion-button (click)="back()">
         <ion-icon slot="start" name="arrow-undo-outline"></ion-icon>
         Regresar
       </ion-button>
     </ion-buttons>
+    <!-- BOTON FAVORITO -->
     <ion-buttons (click)="presentToast('top')" slot="end">
       <ion-button (click)="favorite()">
         <ion-icon slot="end" name="star-outline"></ion-icon>

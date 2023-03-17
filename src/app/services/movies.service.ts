@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { MovieDetails, AnswerMDB, AnswerCredits, Genre, GenreResponse } from '../interfaces/interfaces';
+import { MovieDetails, AnswerMDB, AnswerCredits, Genre, GenreResponse, VideoAnswer } from '../interfaces/interfaces';
 import { environment } from 'src/environments/environment';
 
 const URL = environment.url;
@@ -17,6 +17,7 @@ export class MoviesService {
   private executeQuery<T>(query: string) {
     query = URL + query;
     query += `&api_key=${apiKey}&language=es&include_image_language=es`;
+    // console.log(query)
     return this.http.get<T>(query);
   }
 
@@ -48,9 +49,17 @@ export class MoviesService {
     return this.executeQuery<AnswerMDB>(query);
   }
 
+  getKidPopular() {
+    return this.executeQuery<AnswerMDB>('/discover/movie?with_genres=16&sort_by=popularity.desc')
+  }
+
   getSuggestion() {
     const query = `/discover/movie?sort_by=popularity.desc&page=1`;
     return this.executeQuery<AnswerMDB>(query);
+  }
+
+  getSimilar(id: number) {
+    return this.executeQuery<AnswerMDB>(`/movie/${id}/similar?hola=1`);
   }
 
   getMovieDetails(id: number) {
@@ -59,6 +68,10 @@ export class MoviesService {
 
   getMovieActors(id: number) {
     return this.executeQuery<AnswerCredits>(`/movie/${id}/credits?hola=1`);
+  }
+
+  getVideos(id: number) {
+    return this.executeQuery<VideoAnswer>(`/movie/${id}/videos?hola=1`);
   }
 
   getGenre(): Promise<Genre[]> {

@@ -1,8 +1,12 @@
 .poster-detalle-sobre {
     position: relative;
-    top: -85px;
+    top: -105px;
     left: -10px;
     margin-bottom: -90px;
+}
+
+.poster-img {
+    box-shadow: rgb(0 0 0 / 45%) 7px -9px 10px;
 }
 
 .titulo {
@@ -41,9 +45,33 @@
 }
 
 .btn-read-more {
+    cursor: pointer;
     font-size: 15px;
     filter: opacity(0.5);
     -webkit-filter: opacity(0.5);
+}
+
+.backdrop-img {
+    width: 100%;
+}
+
+.backdrop-container {
+    position: relative;
+    width: 100%;
+    height: 20px;
+    bottom: 20px;
+    background: linear-gradient(to top, rgba(255, 255, 255) 1%, transparent, transparent, transparent);
+}
+
+.statistics-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    top: -20px;
+}
+
+.statistics {
+    --background: none;
 }
 
 ion-item {

@@ -34,6 +34,15 @@
     padding: 5px;
 }
 
+img {
+    vertical-align: middle;
+}
+
+ion-card {
+    border-radius: 15px;
+    cursor: pointer;
+}
+
 app-root {
     --ion-font-family: 'Raleway', sans-serif;
 }

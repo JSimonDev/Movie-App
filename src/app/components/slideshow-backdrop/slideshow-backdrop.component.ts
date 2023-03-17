@@ -12,7 +12,7 @@ export class SlideshowBackdropComponent implements OnInit {
   @Input() peliculas: Movie[] = [];
   slideOpt = {
     slidesPerView: 1.1,
-    freeMode: false,
+    freeMode: true,
   };
 
   constructor( private modalCtrl: ModalController ) {}

@@ -22,6 +22,25 @@ export interface Movie {
   vote_count:        number;
 }
 
+export interface VideoAnswer {
+  id:      number;
+  results: Video[];
+}
+
+export interface Video {
+  iso_639_1:    string;
+  iso_3166_1:   string;
+  name:         string;
+  key:          string;
+  site:         string;
+  size:         number;
+  type:         string;
+  official:     boolean;
+  published_at: Date;
+  id:           string;
+}
+
+
 export enum OriginalLanguage {
   En = "en",
   Es = "es",

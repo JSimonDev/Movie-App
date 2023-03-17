@@ -6,6 +6,7 @@ import { SlideshowBackdropComponent } from './slideshow-backdrop/slideshow-backd
 import { SlideshowPosterComponent } from './slideshow-poster/slideshow-poster.component';
 import { SlideshowParesComponent } from './slideshow-pares/slideshow-pares.component';
 import { DetailsComponent } from './details/details.component';
+import { SkeletonComponent } from './skeleton/skeleton.component'
 
 
 
@@ -14,6 +15,7 @@ import { DetailsComponent } from './details/details.component';
     SlideshowBackdropComponent,
     SlideshowPosterComponent,
     SlideshowParesComponent,
+    SkeletonComponent,
     DetailsComponent
   ],
   imports: [
@@ -25,6 +27,7 @@ import { DetailsComponent } from './details/details.component';
     SlideshowBackdropComponent,
     SlideshowPosterComponent,
     SlideshowParesComponent,
+    SkeletonComponent,
     DetailsComponent
   ]
 })
